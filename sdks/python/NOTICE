@@ -1,0 +1,6 @@
+DataCat Python library
+Copyright 2026 The DataCat authors
+
+Licensed under the Apache License, Version 2.0 (see LICENSE). Built on the OpenTelemetry
+Python SDK (Apache-2.0). Third-party dependencies are installed separately by pip and keep
+their own licenses.

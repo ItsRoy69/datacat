@@ -1,0 +1,29 @@
+{
+  "run": "bc4zn",
+  "results": [
+    {
+      "scenario": "agent_restart",
+      "lang": "python",
+      "service": "recovery-python-agent-restart-bc4zn",
+      "rate_spans_per_s": 200,
+      "seconds": 90,
+      "fault_started_s": 30.035,
+      "fault_duration_s": 34.14,
+      "sent": {
+        "spans": 18000,
+        "logs": 9000
+      },
+      "spans_rows": 18000,
+      "spans_unique": 18000,
+      "logs_rows": 9001,
+      "logs_unique": 9000,
+      "spans_missing": 0,
+      "spans_duplicates": 0,
+      "logs_missing": 0,
+      "logs_duplicates": 1,
+      "seconds_to_fresh_data_after_recovery": 0.636,
+      "seconds_to_fully_drained_after_end": 0.169,
+      "generator_stderr": "Configuration of configurator not loaded because datacat is set by OTEL_PYTHON_CONFIGURATOR\n"
+    }
+  ]
+}

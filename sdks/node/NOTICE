@@ -1,0 +1,6 @@
+DataCat Node.js library
+Copyright 2026 The DataCat authors
+
+Licensed under the Apache License, Version 2.0 (see LICENSE). Built on the OpenTelemetry
+JavaScript SDK (Apache-2.0). Third-party dependencies are installed separately by npm and keep
+their own licenses.

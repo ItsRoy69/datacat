@@ -1,0 +1,33 @@
+{
+  "name": "@workspace/web",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "serve": "vite preview",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "catalog:",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@vitejs/plugin-react": "catalog:",
+    "tailwindcss": "catalog:",
+    "vite": "catalog:"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "catalog:",
+    "clsx": "catalog:",
+    "date-fns": "^3.6.0",
+    "lucide-react": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "recharts": "^2.15.4",
+    "tailwind-merge": "catalog:",
+    "wouter": "catalog:"
+  },
+  "license": "Apache-2.0"
+}

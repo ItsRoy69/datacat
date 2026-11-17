@@ -1,0 +1,4 @@
+# Fake credentials used on purpose by the redaction test (bench/security/isolation.js): they must be masked before storage.
+bench/security/isolation.js:stripe-access-token:208
+bench/security/isolation.js:jwt:199
+artifacts/api-server/test/redact.test.ts:jwt:13

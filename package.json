@@ -1,0 +1,25 @@
+{
+  "name": "datacat",
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "packageManager": "pnpm@10.11.0",
+  "engines": {
+    "node": ">=22.15.0"
+  },
+  "scripts": {
+    "preinstall": "sh -c 'rm -f package-lock.json yarn.lock; case \"$npm_config_user_agent\" in pnpm/*) ;; *) echo \"Use pnpm instead\" >&2; exit 1 ;; esac'",
+    "build": "pnpm run typecheck && pnpm -r --if-present run build",
+    "build:selfhost": "tsc --build lib/db && pnpm --filter @workspace/api-server run typecheck && pnpm --filter @workspace/web run typecheck && pnpm --filter @workspace/api-server run build && pnpm --filter @workspace/web run build && pnpm run notices",
+    "start": "node --enable-source-maps artifacts/api-server/dist/index.mjs",
+    "typecheck:libs": "tsc --build",
+    "typecheck": "pnpm run typecheck:libs && pnpm -r --filter \"./artifacts/**\" --if-present run typecheck",
+    "format": "prettier --write \"artifacts/api-server/src/**/*.ts\" \"artifacts/api-server/test/**/*.ts\" \"artifacts/web/src/**/*.{ts,tsx}\" \"lib/*/src/**/*.ts\"",
+    "format:check": "prettier --check \"artifacts/api-server/src/**/*.ts\" \"artifacts/api-server/test/**/*.ts\" \"artifacts/web/src/**/*.{ts,tsx}\" \"lib/*/src/**/*.ts\"",
+    "notices": "pnpm licenses list --prod --json | node scripts/third-party-notices.mjs artifacts/web/dist/THIRD_PARTY_NOTICES.txt"
+  },
+  "private": true,
+  "devDependencies": {
+    "prettier": "^3.9.10",
+    "typescript": "~5.9.3"
+  }
+}

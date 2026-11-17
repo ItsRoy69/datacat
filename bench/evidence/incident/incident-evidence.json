@@ -1,0 +1,136 @@
+{
+  "injected_at": "2026-11-12T04:36:48.484Z",
+  "monitor_id": 18,
+  "monitor_query": "spans(\"env:prod team:acme status:error\").by(\"service\").last(\"2m\") > 60",
+  "state_before": "OK",
+  "seconds_to_alert": 40.066,
+  "seconds_to_webhook": 38.224,
+  "alerting_groups": [
+    {
+      "group": "service:web-gateway",
+      "value": 128
+    },
+    {
+      "group": "service:cart-service",
+      "value": 98
+    }
+  ],
+  "webhook": [
+    {
+      "ts": "2026-11-12T04:37:26.708Z",
+      "status": 200,
+      "body": {
+        "monitor_id": 18,
+        "monitor_name": "Checkout path errors by service",
+        "transition": "OK -> Alert",
+        "state": "Alert",
+        "value": 98,
+        "threshold": 60,
+        "group": "service:cart-service",
+        "tags": [
+          "service:cart-service"
+        ],
+        "query": "spans(\"env:prod team:acme status:error\").by(\"service\").last(\"2m\") > 60",
+        "date": "2026-11-12T04:37:26.705Z",
+        "title": "[Triggered on service:cart-service] Checkout path errors by service",
+        "body": "cart-service is failing: 98 error spans in 2 minutes. Open the monitor for the failing traces and logs."
+      }
+    },
+    {
+      "ts": "2026-11-12T04:37:26.710Z",
+      "status": 200,
+      "body": {
+        "monitor_id": 18,
+        "monitor_name": "Checkout path errors by service",
+        "transition": "OK -> Alert",
+        "state": "Alert",
+        "value": 128,
+        "threshold": 60,
+        "group": "service:web-gateway",
+        "tags": [
+          "service:web-gateway"
+        ],
+        "query": "spans(\"env:prod team:acme status:error\").by(\"service\").last(\"2m\") > 60",
+        "date": "2026-11-12T04:37:26.705Z",
+        "title": "[Triggered on service:web-gateway] Checkout path errors by service",
+        "body": "web-gateway is failing: 128 error spans in 2 minutes. Open the monitor for the failing traces and logs."
+      }
+    }
+  ],
+  "cart_error_spans": 102,
+  "faulty_db_span": {
+    "name": "postgresql.query",
+    "resource": "select sku, sum(quantity)::int as qty from carts where user_id = $1 group by sku",
+    "statement": "select sku, sum(quantity)::int as qty from carts where user_id = $1 group by sku",
+    "message": "PostgreSQL error of type 'error' occurred (code: 42703)",
+    "trace_id": "16184855911953300307"
+  },
+  "example_checkout_trace": {
+    "trace_id": "16184855911953300307",
+    "spans": [
+      {
+        "service": "cart-service",
+        "name": "postgresql.query",
+        "resource": "select sku, sum(quantity)::int as qty from carts where user_id = $1 group by sku",
+        "error": 1,
+        "parent_id": "841169120574822699",
+        "span_id": "17669728735124412416",
+        "statement": "select sku, sum(quantity)::int as qty from carts where user_id = $1 group by sku",
+        "message": "PostgreSQL error of type 'error' occurred (code: 42703)"
+      },
+      {
+        "service": "cart-service",
+        "name": "http.server.request",
+        "resource": "GET /cart/:user",
+        "error": 1,
+        "parent_id": "15482276787334132810",
+        "span_id": "841169120574822699"
+      },
+      {
+        "service": "web-gateway",
+        "name": "http.client.request",
+        "resource": "GET 127.0.0.1",
+        "error": 1,
+        "parent_id": "6383450473337213064",
+        "span_id": "15482276787334132810"
+      },
+      {
+        "service": "web-gateway",
+        "name": "http.server.request",
+        "resource": "POST /checkout",
+        "error": 1,
+        "parent_id": "0",
+        "span_id": "6383450473337213064"
+      }
+    ],
+    "logs": [
+      {
+        "service": "web-gateway",
+        "status": "error",
+        "message": "checkout failed: cart-service returned 500"
+      },
+      {
+        "service": "cart-service",
+        "status": "error",
+        "message": "cart lookup failed: column \"quantity\" does not exist"
+      }
+    ]
+  },
+  "cart_error_logs": {
+    "total": 51,
+    "sample": [
+      {
+        "message": "cart lookup failed: column \"quantity\" does not exist",
+        "trace_id": "16184855911953300307"
+      },
+      {
+        "message": "cart lookup failed: column \"quantity\" does not exist",
+        "trace_id": "12652812779087946890"
+      },
+      {
+        "message": "cart lookup failed: column \"quantity\" does not exist",
+        "trace_id": "8927896397687136824"
+      }
+    ]
+  }
+}

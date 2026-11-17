@@ -1,0 +1,79 @@
+# See https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+
+# compiled output
+dist
+tmp
+out-tsc
+*.tsbuildinfo
+.expo
+.expo-shared
+.next
+.turbo
+.svelte-kit
+.nuxt
+.output
+.vercel
+
+# dependencies
+node_modules
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+
+# System Files
+.DS_Store
+Thumbs.db
+
+
+# Local tooling
+.cache/
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+agent/_build/
+agent/_tools/
+**/downloads/datacat-agent-*
+/downloads/
+.tsbuildinfo
+
+# benchmark raw output (kept locally; summaries live in the README/RESULTS files)
+bench/**/*.json
+!bench/evidence/**
+bench/**/*.jsonl
+bench/**/*.err
+bench/**/*.out
+bench/**/*.trials
+bench/**/*.done
+bench/**/results/
+bench/soak/out/
+.pnpm-store/
+bench/.deps/

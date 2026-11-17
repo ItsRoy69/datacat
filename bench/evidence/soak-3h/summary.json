@@ -1,0 +1,92 @@
+{
+  "run": "soak3h",
+  "hours": 3,
+  "monitors": 20,
+  "sent": {
+    "run": "soak3h",
+    "seconds": 10803,
+    "sent": {
+      "spans": 26056846,
+      "logs": 4399585,
+      "metric_points": 3310000
+    },
+    "rate": {
+      "spans_per_s": 2412,
+      "logs_per_s": 407
+    },
+    "requests": 90223,
+    "errors": 0
+  },
+  "monitor_events": {
+    "soak cpu by host": 0,
+    "soak errors by service": 0,
+    "soak expected ALERT": 1,
+    "soak expected OK": 0,
+    "soak host load by host": 0,
+    "soak log errors svc-00": 0,
+    "soak log errors svc-01": 0,
+    "soak log errors svc-02": 0,
+    "soak log errors svc-03": 0,
+    "soak logs volume": 0,
+    "soak orders by plan": 0,
+    "soak spans volume": 0,
+    "soak trace errors svc-00": 0,
+    "soak trace errors svc-01": 0,
+    "soak trace errors svc-02": 0,
+    "soak trace errors svc-03": 0,
+    "soak trace errors svc-04": 0,
+    "soak trace errors svc-05": 0,
+    "soak trace errors svc-06": 0,
+    "soak trace errors svc-07": 0
+  },
+  "monitor_states": {
+    "soak cpu by host": "OK",
+    "soak errors by service": "OK",
+    "soak expected ALERT": "Alert",
+    "soak expected OK": "OK",
+    "soak host load by host": "OK",
+    "soak log errors svc-00": "OK",
+    "soak log errors svc-01": "OK",
+    "soak log errors svc-02": "OK",
+    "soak log errors svc-03": "OK",
+    "soak logs volume": "OK",
+    "soak orders by plan": "OK",
+    "soak spans volume": "OK",
+    "soak trace errors svc-00": "OK",
+    "soak trace errors svc-01": "OK",
+    "soak trace errors svc-02": "OK",
+    "soak trace errors svc-03": "OK",
+    "soak trace errors svc-04": "OK",
+    "soak trace errors svc-05": "OK",
+    "soak trace errors svc-06": "OK",
+    "soak trace errors svc-07": "OK"
+  },
+  "stored": {
+    "spans": 26056846,
+    "logs": 4399585
+  },
+  "loss": {
+    "spans": 0,
+    "logs": 0
+  },
+  "ramp_first_attempt": [
+    {
+      "traces_per_s_target": 400,
+      "spans_per_s_achieved": 2412,
+      "logs_per_s_achieved": 408,
+      "achieved_vs_target_traces": 6.04,
+      "intake_p99_ms_max": 10544,
+      "errors": 0,
+      "server_cpu_pct_max": 11,
+      "pg_cpu_pct_max": 17,
+      "monitor_staleness_s_max": 10,
+      "traces_per_s_achieved": 400,
+      "achieved_ratio": 1,
+      "breaking": true
+    }
+  ],
+  "notes": [
+    "stored.logs recounted after the run: the original query looked for loadtest.run in log attributes, but it is stored in log tags (fixed in soak.js)",
+    "ramp_first_attempt stopped at its first step because one 10-second window had p99 10.5 s; the ramp rule now uses the sustained p99 (90th percentile of windows); see ../ramp2"
+  ]
+}

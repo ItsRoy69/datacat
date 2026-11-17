@@ -1,0 +1,74 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-datacat}
+      POSTGRES_DB: ${POSTGRES_DB:-datacat}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-datacat} -d ${POSTGRES_DB:-datacat}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  # Optional ClickHouse for telemetry storage: start with `--profile clickhouse` and set DATACAT_STORAGE=clickhouse in .env.
+  clickhouse:
+    profiles: ["clickhouse"]
+    image: clickhouse/clickhouse-server:26.10
+    restart: unless-stopped
+    environment:
+      CLICKHOUSE_USER: ${CLICKHOUSE_USER:-datacat}
+      CLICKHOUSE_PASSWORD: ${CLICKHOUSE_PASSWORD:-}
+      CLICKHOUSE_DB: ${DATACAT_CLICKHOUSE_DB:-datacat}
+      CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: 0
+    volumes:
+      - clickhouse-data:/var/lib/clickhouse
+    ulimits:
+      nofile: { soft: 262144, hard: 262144 }
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:8123/ping | grep -q Ok"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+  datacat:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-datacat}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-datacat}
+      PUBLIC_URL: ${PUBLIC_URL:-http://localhost:3000}
+      SESSION_SECRET: ${SESSION_SECRET:?Set SESSION_SECRET in .env}
+      DATACAT_RETENTION_DAYS: ${DATACAT_RETENTION_DAYS:-15}
+      DATACAT_SETUP_TOKEN: ${DATACAT_SETUP_TOKEN:-}
+      DATACAT_TRUST_PROXY: ${DATACAT_TRUST_PROXY:-}
+      DATACAT_ALLOW_PRIVATE_WEBHOOKS: ${DATACAT_ALLOW_PRIVATE_WEBHOOKS:-false}
+      DATACAT_STORAGE: ${DATACAT_STORAGE:-postgres}
+      DATACAT_CLICKHOUSE_URL: ${DATACAT_CLICKHOUSE_URL:-http://clickhouse:8123}
+      DATACAT_CLICKHOUSE_USER: ${CLICKHOUSE_USER:-datacat}
+      DATACAT_CLICKHOUSE_DB: ${DATACAT_CLICKHOUSE_DB:-datacat}
+      DATACAT_CLICKHOUSE_PASSWORD: ${CLICKHOUSE_PASSWORD:-}
+    ports:
+      - "${BIND_ADDRESS:-127.0.0.1}:${PORT:-3000}:3000"
+    volumes:
+      - ./downloads:/app/downloads:ro
+  datacat-agent:
+    profiles: ["agent"]
+    build:
+      context: .
+      dockerfile: agent/Dockerfile
+    restart: unless-stopped
+    depends_on: [datacat]
+    environment:
+      DATACAT_API_KEY: ${DATACAT_AGENT_API_KEY:-}
+    volumes:
+      - ./agent/docker.yaml:/etc/datacat/datacat.yaml:ro
+      - agent-state:/var/lib/datacat-agent
+    # Container metrics only; install the host agent separately for full host visibility.
+volumes:
+  postgres-data:
+  clickhouse-data:
+  agent-state:

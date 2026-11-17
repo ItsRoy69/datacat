@@ -1,0 +1,14 @@
+api_key: ${DATACAT_API_KEY}
+url: http://datacat:3000
+env: prod
+listen: 127.0.0.1
+state_dir: /var/lib/datacat-agent
+host_metrics:
+  enabled: true
+  interval: 15s
+apm:
+  otlp: true
+  datadog_compat: false
+dogstatsd:
+  enabled: false
+logs: []

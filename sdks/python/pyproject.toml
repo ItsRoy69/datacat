@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "datacat-trace"
+version = "0.1.0"
+description = "DataCat tracing, metrics and logs powered by OpenTelemetry"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+dependencies = [
+  "opentelemetry-api>=1.39,<2",
+  "opentelemetry-sdk>=1.39,<2",
+  "opentelemetry-exporter-otlp-proto-http>=1.39,<2",
+  "opentelemetry-distro>=0.60b0,<1",
+  "opentelemetry-instrumentation-logging>=0.60b0,<1",
+]
+
+[project.urls]
+Homepage = "https://github.com/replit/datacat"
+Source = "https://github.com/replit/datacat/tree/main/sdks/python"
+Issues = "https://github.com/replit/datacat/issues"
+
+[project.optional-dependencies]
+instrumentation = [
+  "opentelemetry-instrumentation-flask>=0.60b0,<1",
+  "opentelemetry-instrumentation-django>=0.60b0,<1",
+  "opentelemetry-instrumentation-fastapi>=0.60b0,<1",
+  "opentelemetry-instrumentation-requests>=0.60b0,<1",
+  "opentelemetry-instrumentation-urllib3>=0.60b0,<1",
+  "opentelemetry-instrumentation-sqlite3>=0.60b0,<1",
+  "opentelemetry-instrumentation-psycopg2>=0.60b0,<1",
+  "opentelemetry-instrumentation-psycopg>=0.60b0,<1",
+  "opentelemetry-instrumentation-redis>=0.60b0,<1",
+]
+test = ["flask>=3", "requests>=2"]
+
+[project.scripts]
+datacat-run = "datacat.cli:run"
+datacat-bootstrap = "datacat.cli:bootstrap"
+
+[project.entry-points.opentelemetry_distro]
+datacat = "datacat.distro:DataCatDistro"
+
+[project.entry-points.opentelemetry_configurator]
+datacat = "datacat.distro:DataCatConfigurator"
+
+[tool.setuptools.packages.find]
+where = ["src"]

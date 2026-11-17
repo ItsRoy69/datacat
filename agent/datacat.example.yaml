@@ -1,0 +1,37 @@
+# Copy to /etc/datacat/datacat.yaml (mode 0600).
+api_key: ${DATACAT_API_KEY}
+url: http://localhost:3000
+# hostname: my-host
+env: prod
+tags: [team:acme]
+host_metrics:
+  enabled: true
+  interval: 15s
+# Local-only by default. Set 0.0.0.0 only behind appropriate firewall rules.
+listen: 127.0.0.1
+state_dir: /var/lib/datacat-agent
+apm:
+  otlp: true
+  datadog_compat: true
+dogstatsd:
+  enabled: true
+  port: 8125
+logs:
+  - path: /var/log/acme/web-gateway.log
+    service: web-gateway
+    source: nodejs
+    tags: [team:storefront]
+  - path: /var/log/acme/cart-service.log
+    service: cart-service
+    source: nodejs
+  - path: /var/log/acme/payments-service.log
+    service: payments-service
+    source: nodejs
+  - path: /var/log/acme/catalog-service.log
+    service: catalog-service
+    source: nodejs
+  - path: /var/log/acme/order-worker.log
+    service: order-worker
+    source: nodejs
+# Debug output includes telemetry payloads; enable only during diagnosis.
+debug: false

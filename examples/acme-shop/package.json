@@ -1,0 +1,13 @@
+{
+  "name": "acme-shop",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Five-service demo shop instrumented with the DataCat libraries",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@datacat/trace": "file:../../sdks/node",
+    "express": "^5.3.0",
+    "pg": "^8.23.1",
+    "winston": "^3.19.0"
+  }
+}

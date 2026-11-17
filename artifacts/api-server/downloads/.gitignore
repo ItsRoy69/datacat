@@ -1,0 +1,3 @@
+datacat-agent-*
+*.tgz
+*.whl

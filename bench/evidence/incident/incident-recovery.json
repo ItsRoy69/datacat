@@ -1,0 +1,48 @@
+{
+  "fixed_at": "2026-11-12T04:41:08.313Z",
+  "seconds_to_ok": 140.347,
+  "seconds_to_recovery_webhook": 108.423,
+  "final_state": "OK",
+  "webhook": [
+    {
+      "ts": "2026-11-12T04:42:56.736Z",
+      "status": 200,
+      "body": {
+        "monitor_id": 18,
+        "monitor_name": "Checkout path errors by service",
+        "transition": "Alert -> OK",
+        "state": "OK",
+        "value": 48,
+        "threshold": 60,
+        "group": "service:cart-service",
+        "tags": [
+          "service:cart-service"
+        ],
+        "query": "spans(\"env:prod team:acme status:error\").by(\"service\").last(\"2m\") > 60",
+        "date": "2026-11-12T04:42:56.730Z",
+        "title": "[Recovered on service:cart-service] Checkout path errors by service",
+        "body": "cart-service recovered."
+      }
+    },
+    {
+      "ts": "2026-11-12T04:43:26.721Z",
+      "status": 200,
+      "body": {
+        "monitor_id": 18,
+        "monitor_name": "Checkout path errors by service",
+        "transition": "Alert -> OK",
+        "state": "OK",
+        "value": 33,
+        "threshold": 60,
+        "group": "service:web-gateway",
+        "tags": [
+          "service:web-gateway"
+        ],
+        "query": "spans(\"env:prod team:acme status:error\").by(\"service\").last(\"2m\") > 60",
+        "date": "2026-11-12T04:43:26.717Z",
+        "title": "[Recovered on service:web-gateway] Checkout path errors by service",
+        "body": "web-gateway recovered."
+      }
+    }
+  ]
+}

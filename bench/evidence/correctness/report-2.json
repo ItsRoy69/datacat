@@ -1,0 +1,276 @@
+{
+  "run": "p2fpk9",
+  "services": [
+    "truth-gw-p2fpk9",
+    "truth-py-p2fpk9"
+  ],
+  "requests": 3000,
+  "window": [
+    "2026-11-12T04:30:03.980Z",
+    "2026-11-12T04:30:17.181Z"
+  ],
+  "mix": {
+    "fast": 55,
+    "medium": 22,
+    "slow": 8,
+    "fail": 5,
+    "chain": 10
+  },
+  "truth": {
+    "fast": {
+      "hits": 1650,
+      "errors": 0,
+      "p50": 10.898722,
+      "p95": 12.20044,
+      "p99": 15.029229
+    },
+    "medium": {
+      "hits": 660,
+      "errors": 0,
+      "p50": 50.854517,
+      "p95": 52.249528,
+      "p99": 55.468226
+    },
+    "slow": {
+      "hits": 240,
+      "errors": 0,
+      "p50": 200.850937,
+      "p95": 202.410613,
+      "p99": 204.262244
+    },
+    "fail": {
+      "hits": 150,
+      "errors": 150,
+      "p50": 20.943234,
+      "p95": 22.156573,
+      "p99": 25.084255
+    },
+    "chain": {
+      "hits": 300,
+      "errors": 0,
+      "p50": 5.021844,
+      "p95": 7.442575,
+      "p99": 11.296279
+    }
+  },
+  "passed": 36,
+  "total": 36,
+  "checks": [
+    {
+      "name": "service truth-gw-p2fpk9: hits (3000 requests + 1 health check)",
+      "expected": 3001,
+      "actual": 3001,
+      "pass": true
+    },
+    {
+      "name": "service truth-gw-p2fpk9: errors",
+      "expected": 150,
+      "actual": 150,
+      "pass": true
+    },
+    {
+      "name": "service truth-gw-p2fpk9: error rate",
+      "expected": 0.04998,
+      "actual": 0.04998,
+      "pass": true
+    },
+    {
+      "name": "service truth-gw-p2fpk9: p50",
+      "expected": "10.0–13.5 ms (client 11.3 ms)",
+      "actual": "10.7 ms",
+      "pass": true
+    },
+    {
+      "name": "service truth-gw-p2fpk9: p95",
+      "expected": "200.0–206.7 ms (client 200.6 ms)",
+      "actual": "202.2 ms",
+      "pass": true
+    },
+    {
+      "name": "service truth-gw-p2fpk9: p99",
+      "expected": "200.0–207.7 ms (client 201.6 ms)",
+      "actual": "202.2 ms",
+      "pass": true
+    },
+    {
+      "name": "service truth-py-p2fpk9: hits (300 chained + 1 health check)",
+      "expected": 301,
+      "actual": 301,
+      "pass": true
+    },
+    {
+      "name": "service page: resource GET /op/:kind present",
+      "expected": "GET /op/:kind",
+      "actual": "GET /op/:kind",
+      "pass": true
+    },
+    {
+      "name": "service page: resource hits",
+      "expected": 3000,
+      "actual": 3000,
+      "pass": true
+    },
+    {
+      "name": "service page: downstream includes truth-py-p2fpk9",
+      "expected": "truth-py-p2fpk9",
+      "actual": "truth-py-p2fpk9",
+      "pass": true
+    },
+    {
+      "name": "service page: timeseries hits sum",
+      "expected": 3001,
+      "actual": 3001,
+      "pass": true
+    },
+    {
+      "name": "spans /op/fast: p50",
+      "expected": "10.0–13.1 ms (client 10.9 ms)",
+      "actual": "10.5 ms",
+      "pass": true
+    },
+    {
+      "name": "spans /op/fast: p95",
+      "expected": "10.0–14.4 ms (client 12.2 ms)",
+      "actual": "11.3 ms",
+      "pass": true
+    },
+    {
+      "name": "spans /op/fast: p99",
+      "expected": "10.0–17.3 ms (client 15.0 ms)",
+      "actual": "11.9 ms",
+      "pass": true
+    },
+    {
+      "name": "spans /op/medium: p50",
+      "expected": "50.0–53.9 ms (client 50.9 ms)",
+      "actual": "50.4 ms",
+      "pass": true
+    },
+    {
+      "name": "spans /op/medium: p95",
+      "expected": "50.0–55.3 ms (client 52.2 ms)",
+      "actual": "51.2 ms",
+      "pass": true
+    },
+    {
+      "name": "spans /op/medium: p99",
+      "expected": "50.0–58.6 ms (client 55.5 ms)",
+      "actual": "51.7 ms",
+      "pass": true
+    },
+    {
+      "name": "spans /op/slow: p50",
+      "expected": "200.0–206.9 ms (client 200.9 ms)",
+      "actual": "200.5 ms",
+      "pass": true
+    },
+    {
+      "name": "spans /op/slow: p95",
+      "expected": "200.0–208.5 ms (client 202.4 ms)",
+      "actual": "201.4 ms",
+      "pass": true
+    },
+    {
+      "name": "spans /op/slow: p99",
+      "expected": "200.0–210.3 ms (client 204.3 ms)",
+      "actual": "201.6 ms",
+      "pass": true
+    },
+    {
+      "name": "spans /op/fail: p50",
+      "expected": "20.0–23.4 ms (client 20.9 ms)",
+      "actual": "20.6 ms",
+      "pass": true
+    },
+    {
+      "name": "spans /op/fail: p95",
+      "expected": "20.0–24.6 ms (client 22.2 ms)",
+      "actual": "21.4 ms",
+      "pass": true
+    },
+    {
+      "name": "spans /op/fail: p99",
+      "expected": "20.0–27.6 ms (client 25.1 ms)",
+      "actual": "21.7 ms",
+      "pass": true
+    },
+    {
+      "name": "spans /op/chain: p50",
+      "expected": "0.0–7.1 ms (client 5.0 ms)",
+      "actual": "4.7 ms",
+      "pass": true
+    },
+    {
+      "name": "spans /op/chain: p95",
+      "expected": "0.0–9.6 ms (client 7.4 ms)",
+      "actual": "6.6 ms",
+      "pass": true
+    },
+    {
+      "name": "spans /op/chain: p99",
+      "expected": "0.0–13.5 ms (client 11.3 ms)",
+      "actual": "7.3 ms",
+      "pass": true
+    },
+    {
+      "name": "logs truth-gw-p2fpk9: count",
+      "expected": 3000,
+      "actual": 3000,
+      "pass": true
+    },
+    {
+      "name": "logs truth-gw-p2fpk9: status:error",
+      "expected": 150,
+      "actual": 150,
+      "pass": true
+    },
+    {
+      "name": "logs truth-py-p2fpk9: count",
+      "expected": 300,
+      "actual": 300,
+      "pass": true
+    },
+    {
+      "name": "logs truth-gw-p2fpk9: linked to a stored trace",
+      "expected": 3000,
+      "actual": 3000,
+      "pass": true
+    },
+    {
+      "name": "traces (sample of 60 chain requests): both services, SQLite span, no orphan spans, both logs attached",
+      "expected": 60,
+      "actual": 60,
+      "pass": true
+    },
+    {
+      "name": "metric truth.requests{kind:fast} sum",
+      "expected": 1650,
+      "actual": 1650,
+      "pass": true
+    },
+    {
+      "name": "metric truth.requests{kind:medium} sum",
+      "expected": 660,
+      "actual": 660,
+      "pass": true
+    },
+    {
+      "name": "metric truth.requests{kind:slow} sum",
+      "expected": 240,
+      "actual": 240,
+      "pass": true
+    },
+    {
+      "name": "metric truth.requests{kind:fail} sum",
+      "expected": 150,
+      "actual": 150,
+      "pass": true
+    },
+    {
+      "name": "metric truth.requests{kind:chain} sum",
+      "expected": 300,
+      "actual": 300,
+      "pass": true
+    }
+  ]
+}
